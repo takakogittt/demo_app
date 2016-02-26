@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @entry.name %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @entry.body %>
+</p>
+
+<%= link_to 'Edit', edit_entry_path(@entry) %> |
+<%= link_to 'Back', entries_path %>
+
+
+<!--ここから追加-->
+
+<h3>コメント</h3>
+
+<% @entry.comments.each do |comment| %>
+
+  <div>
+
+    <strong><%= comment.name %></strong>
+
+    <br />
+
+    <p><%= comment.body %></p>
+
+    <% if comment.persisted? %>
+
+      <p><%= link_to 'Delete', comment_path(comment), method: :delete, data: { confirm: '削除してもよろしいですか？' } %></p>
+
+    <% end %>
+
+  </div>
+
+<% end %>
+
+<%= render 'comments/form' %>
